@@ -1,0 +1,23 @@
+services:
+  backend:
+    image: ghcr.io/aculei/aculei-be:main
+    ports:
+      - 8080:8080
+    networks:
+      - common-net
+
+  postgres:
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=aculei
+    networks:
+      - common-net
+
+networks:
+  common-net: {}
